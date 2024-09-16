@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page avec caméra</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #camera-container {
+            width: 80%;
+            max-width: 800px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="camera-container">
+        <video id="video" autoplay></video>
+    </div>
+    <script>
+        // Accéder au flux vidéo de la caméra
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function(stream) {
+                // Obtenir l'élément vidéo
+                var video = document.getElementById('video');
+                // Assigner le flux vidéo à la source de l'élément vidéo
+                video.srcObject = stream;
+            })
+            .catch(function(err) {
+                console.error("Erreur d'accès à la caméra : " + err);
+            });
+    </script>
+</body>
+</html>
